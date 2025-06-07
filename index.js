@@ -17,11 +17,12 @@ const openai = new OpenAI({
 
 app.post('/analyze', upload.single('image'), async (req, res) => {
   try {
+    console.log("Received file:", req.file);
     const imagePath = req.file.path;
     const base64Image = fs.readFileSync(imagePath, { encoding: 'base64' });
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4-vision-preview",
+      model: "gpt-4o",
       messages: [
         {
           role: "user",
